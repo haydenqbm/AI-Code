@@ -64,7 +64,7 @@ function get_db_connection() {
     }
     
     return $conn;
-}
+
 
 // Handle login
 if (isset($_POST['login'])) {
