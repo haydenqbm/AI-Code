@@ -28,7 +28,8 @@ function check_lockout() {
 function get_db_connection() {
     global $host, $user, $password, $dbname;
     
-    $conn = new mysqli($host, $user, $password);
+    // Use empty password for XAMPP default
+    $conn = new mysqli($host, $user, '');
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
