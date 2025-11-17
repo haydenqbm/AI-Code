@@ -26,12 +26,14 @@ function check_lockout() {
 
 // Create database connection
 function get_db_connection() {
-    global $host, $user, $password, $dbname;
-    
-    $conn = new mysqli($host, $user, $password);
+    global $host, $db_user, $db_pass, $db_name;
+
+    $conn = new mysqli($host, $db_user, $db_pass, $db_name);
+
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
+
     
     // Create database if it doesn't exist
     $conn->query("CREATE DATABASE IF NOT EXISTS $dbname");
