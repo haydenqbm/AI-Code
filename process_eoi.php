@@ -66,7 +66,7 @@ $state = sanitize_input($_POST['state'] ?? '');
 $postcode = sanitize_input($_POST['postcode'] ?? '');
 $email = sanitize_input($_POST['email'] ?? '');
 $phone = sanitize_input($_POST['phone'] ?? '');
-$skills = $_POST['skills'] ?? [];
+$skills = isset($_POST['skills']) ? (is_array($_POST['skills']) ? $_POST['skills'] : [$_POST['skills']]) : [];
 $other_skills = sanitize_input($_POST['other-skills'] ?? '');
 
 // Server-side validation

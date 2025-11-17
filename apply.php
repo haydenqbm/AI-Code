@@ -124,11 +124,11 @@
                         <!-- Required to check at least one skill: 'required' on the first checkbox enforces selection. -->
                         <legend>Required Technical Skills</legend>
                         <div class="checkbox-group">
-                            <label><input type="checkbox" name="skills" value="cloud" required> Cloud Architecture</label>
-                            <label><input type="checkbox" name="skills" value="security"> Cybersecurity Operations</label>
-                            <label><input type="checkbox" name="skills" value="data"> Data Engineering</label>
-                            <label><input type="checkbox" name="skills" value="agile"> Agile Delivery Leadership</label>
-                            <label><input type="checkbox" name="skills" value="other"> Other Skills</label>
+                            <label><input type="checkbox" name="skills[]" value="cloud" required> Cloud Architecture</label>
+                            <label><input type="checkbox" name="skills[]" value="security"> Cybersecurity Operations</label>
+                            <label><input type="checkbox" name="skills[]" value="data"> Data Engineering</label>
+                            <label><input type="checkbox" name="skills[]" value="agile"> Agile Delivery Leadership</label>
+                            <label><input type="checkbox" name="skills[]" value="other"> Other Skills</label>
                         </div>
                     </fieldset>
                     <div>
