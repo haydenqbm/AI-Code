@@ -24,46 +24,44 @@ function check_lockout() {
     return false;
 }
 
-// Create database connection
 function get_db_connection() {
     global $host, $db_user, $db_pass, $db_name;
 
-    $conn = new mysqli($host, $db_user, $db_pass, $db_name);
-
+    // Connect to MySQL server
+    $conn = new mysqli($host, $db_user, $db_pass);
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    return $conn;
-}
-
-    
     // Create database if it doesn't exist
-    $conn->query("CREATE DATABASE IF NOT EXISTS $dbname");
-    $conn->select_db($dbname);
-    
+    $conn->query("CREATE DATABASE IF NOT EXISTS $db_name");
+    $conn->select_db($db_name);
+
     // Create managers table if it doesn't exist
-    $create_managers_table = "CREATE TABLE IF NOT EXISTS managers (
-        id INT PRIMARY KEY AUTO_INCREMENT,
-        username VARCHAR(50) UNIQUE NOT NULL,
-        password VARCHAR(255) NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    )";
+    $create_managers_table = "
+        CREATE TABLE IF NOT EXISTS managers (
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            username VARCHAR(50) UNIQUE NOT NULL,
+            password VARCHAR(255) NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ";
     $conn->query($create_managers_table);
-    
+
     // Create default admin user if no managers exist
     $result = $conn->query("SELECT COUNT(*) as count FROM managers");
     $row = $result->fetch_assoc();
     if ($row['count'] == 0) {
+        $default_username = "admin";
         $default_password = password_hash("admin123", PASSWORD_DEFAULT);
         $stmt = $conn->prepare("INSERT INTO managers (username, password) VALUES (?, ?)");
         $stmt->bind_param("ss", $default_username, $default_password);
-        $default_username = "admin";
         $stmt->execute();
         $stmt->close();
     }
-    
+
     return $conn;
+}
 
 
 // Handle login
