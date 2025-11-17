@@ -27,14 +27,15 @@ function check_lockout() {
 function get_db_connection() {
     global $host, $user, $password, $dbname;
     
-    $conn = new mysqli($host, $user, $password);
+    // Use empty password for XAMPP default
+    $conn = new mysqli($host, $user, '');
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
     // Create database if it doesn't exist
-    $conn->query("CREATE DATABASE IF NOT EXISTS $db_name");
-    $conn->select_db($db_name);
+    $conn->query("CREATE DATABASE IF NOT EXISTS $dbname");
+    $conn->select_db($dbname);
 
     // Create managers table if it doesn't exist
     $create_managers_table = "
