@@ -27,6 +27,13 @@ function check_lockout() {
 // Create database connection
 function get_db_connection() {
     global $host, $db_user, $db_pass, $db_name;
+    echo "<pre>";
+echo "HOST: "; var_dump($host);
+echo "USER: "; var_dump($db_user);
+echo "PASS: "; var_dump($db_pass);
+echo "DB:   "; var_dump($db_name);
+echo "</pre>";
+die();
 
     $conn = new mysqli($host, $db_user, $db_pass, $db_name);
 
